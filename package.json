@@ -1,0 +1,48 @@
+{
+  "name": "coding-challenge",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:format": "prettier --no-config **/*.js",
+    "lint:fix": "eslint --fix --ignore-path .gitignore .",
+    "start": "node ./bin/www",
+    "start-dev": "nodemon ./bin/www",
+    "start-debug": "nodemon --inspect ./bin/www 8081",
+    "test": "mocha ./tests --exit",
+    "coverage": "nyc --reporter=html --reporter=text mocha ./tests/*.js --exit"
+  },
+  "nyc": {
+    "exclude": "*/tests/*.js"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "~4.16.1",
+    "express-http-context": "^1.2.3",
+    "morgan": "~1.9.1",
+    "short-uuid": "^3.1.1",
+    "swagger-jsdoc": "^3.5.0",
+    "swagger-ui-express": "^4.1.2",
+    "tracer": "^1.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "decache": "^4.5.1",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^6.2.2",
+    "nodemon": "^2.0.1",
+    "prettier": "^1.17.1",
+    "sinon": "^7.5.0"
+  }
+}

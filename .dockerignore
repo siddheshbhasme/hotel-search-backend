@@ -1,0 +1,16 @@
+# Ignore everything
+*
+
+# Except these root directories:
+!bin/
+!configs/
+!controllers/
+!middlewares/
+!public/
+!routes/
+!services/
+!utils/
+# ..and these root files:
+!app.js
+!constants.js
+!package*.json
