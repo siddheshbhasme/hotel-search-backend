@@ -70,7 +70,7 @@ const onListening = () => {
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(configs.SERVER_PORT || '3000');
+const port = normalizePort(configs.PORT || '3000');
 app.set('port', port);
 
 /**
