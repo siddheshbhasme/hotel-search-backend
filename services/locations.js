@@ -1,5 +1,5 @@
 const configs = require('../configs');
-const { get } = require('../common/restclient');
+const { get } = require('../common/restClient');
 const jp = require('jsonpath');
 const logger = require('../common/logger').getLogger();
 const baseUrl = 'http://geocoder.api.here.com/6.2/geocode.json';

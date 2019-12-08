@@ -1,5 +1,5 @@
 const axios = require('axios');
-const logger = require('../common/logger').getLogger();
+const logger = require('./logger').getLogger();
 const get = (url, resonseHanlder, errorHandler) => {
   return axios
     .get(url)
