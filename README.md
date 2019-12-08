@@ -29,6 +29,7 @@ URL : https://hotel-search-backend.herokuapp.com/
 2. Set values in `config/development.js` for `HERE_APP_ID` and `HERE_APP_CODE` OR rename `.env.sample` to `.env` and set values in the file. **Note: Make sure you dont commit these changes**
 3. run `npm install`
 4. run `npm run start-dev` for hot-reload enabled env
+5. Browse `http://localhost:3000/' in browser
 
 ### Other commands
 
