@@ -8,7 +8,7 @@ const { suggestLocations } = require('../controllers');
  * /locations:
  *   get:
  *     tags:
- *       - Location Suggestions
+ *       - Locations
  *     description: Returns suggestions based on string
  *     produces:
  *       - application/json

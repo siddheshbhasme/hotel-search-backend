@@ -8,7 +8,7 @@ const { searchHotels } = require('../controllers');
  * /hotels:
  *   get:
  *     tags:
- *       - Hotel Search
+ *       - Hotels
  *     description: Returns list of hotels
  *     produces:
  *       - application/json
