@@ -1,4 +1,4 @@
-var httpContext = require('express-http-context');
+const httpContext = require('express-http-context');
 const short = require('short-uuid')();
 
 const setRequestId = (req, res, next) => {
