@@ -17,13 +17,16 @@ describe('Logger', () => {
 
   after(() => {
     tracer.close();
+    // eslint-disable-next-line no-console
     console.log.restore();
   });
   it('it should log message on console', done => {
     logger.info('ABCD');
+    /* eslint-disable no-console */
     expect(console.log.called).to.be.equals(true);
     expect(console.log.callCount).to.be.equals(1);
     expect(console.log.getCall(0).args[0]).to.contains('ABCD');
+    /* eslint-enable no-console */
     done();
   });
 });

@@ -1,12 +1,15 @@
-const constants = require('../constants');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const {
+  SWAGGER_DEFINITION_TITLE,
+  SWAGGER_DEFINITION_VERSION
+} = require('../constants');
 
 const options = {
   swaggerDefinition: {
     info: {
-      title: `${constants.SWAGGER_DEFINITION_TITLE}`,
-      version: `${constants.SWAGGER_DEFINITION_VERSION}`
+      title: `${SWAGGER_DEFINITION_TITLE}`,
+      version: `${SWAGGER_DEFINITION_VERSION}`
     },
     basePath: '/'
   },

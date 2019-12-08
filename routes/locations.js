@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const logger = require('../common/logger').getLogger();
 const { suggestLocations } = require('../controllers');
-
+const { SUCCESS, SERVER_ERROR } = require('../constants');
 /**
  * @swagger
  * /locations:
@@ -31,12 +31,12 @@ router.get('/', async (req, res) => {
   try {
     logger.info('Search Query:', req.query.query);
     const output = await suggestLocations(req.query.query);
-    const statusCode = output.status || 200;
+    const statusCode = output.status || SUCCESS;
     res.status(statusCode).send(output);
   } catch (err) {
     logger.warn('Error occured during GET /locations');
     logger.error(err);
-    res.status(500).send(err);
+    res.status(SERVER_ERROR).send(err);
   }
 });
 

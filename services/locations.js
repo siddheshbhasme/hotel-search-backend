@@ -1,6 +1,7 @@
+const jp = require('jsonpath');
 const configs = require('../configs');
 const { get } = require('../common/restClient');
-const jp = require('jsonpath');
+const { SERVER_ERROR } = require('../constants');
 const logger = require('../common/logger').getLogger();
 const baseUrl = 'http://geocoder.api.here.com/6.2/geocode.json';
 
@@ -13,7 +14,7 @@ const parseError = error => {
     return error.response.data;
   }
   return {
-    status: 500,
+    status: SERVER_ERROR,
     message: error.message
   };
 };

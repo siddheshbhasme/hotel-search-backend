@@ -1,17 +1,20 @@
 const tracer = require('tracer');
 const httpContext = require('express-http-context');
+const {
+  LOGGER_DEFAULT_FORMAT,
+  LOGGER_ERROR_FORMAT,
+  LOGGER_DATE_FORMAT
+} = require('../constants');
 
 const getLogger = () => {
   return tracer.colorConsole({
     format: [
-      '{{timestamp}} {{title}} {{requestId}} {{path}} Fn-{{method}} Ln-{{line}} Col-{{pos}} | {{message}}',
+      LOGGER_DEFAULT_FORMAT,
       {
-        error:
-          '{{timestamp}} {{title}} {{requestId}} {{path}} Fn-{{method}} Ln-{{line}} Col-{{pos}} | {{message}} \nCall Stack:\n{{stack}}'
-        // error format
+        error: LOGGER_ERROR_FORMAT
       }
     ],
-    dateformat: 'UTC:yyyy-mm-dd HH:MM:ss,l Z',
+    dateformat: LOGGER_DATE_FORMAT,
     preprocess: function(data) {
       data.requestId = httpContext.get('requestId') || '00000';
       data.title = data.title.toUpperCase();

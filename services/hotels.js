@@ -1,6 +1,7 @@
 const configs = require('../configs');
-const { get } = require('../common/restClient');
+const { get } = require('../common/restclient');
 const logger = require('../common/logger').getLogger();
+const { SERVER_ERROR } = require('../constants');
 const baseUrl = 'https://places.demo.api.here.com/places/v1/browse';
 const contextString = ';context=';
 
@@ -31,7 +32,7 @@ const parseError = error => {
     return error.response.data;
   }
   return {
-    status: 500,
+    status: SERVER_ERROR,
     message: error.message
   };
 };

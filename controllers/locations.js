@@ -1,10 +1,10 @@
 const { locationService } = require('../services');
-
+const { BAD_REQUEST, LOCATION_QUERY_INPUT_MISSING } = require('../constants');
 const suggestLocations = query => {
   if (!query) {
     return {
-      status: 400,
-      message: 'Location query is required for search to work'
+      status: BAD_REQUEST,
+      message: LOCATION_QUERY_INPUT_MISSING
     };
   }
   return locationService.getPositionByLocationName(query);
