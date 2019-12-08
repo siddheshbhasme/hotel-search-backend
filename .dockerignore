@@ -3,13 +3,13 @@
 
 # Except these root directories:
 !bin/
+!common/
 !configs/
 !controllers/
 !middlewares/
 !public/
 !routes/
 !services/
-!utils/
 # ..and these root files:
 !app.js
 !constants.js
