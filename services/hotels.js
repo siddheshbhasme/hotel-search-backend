@@ -1,5 +1,5 @@
 const configs = require('../configs');
-const { get } = require('../common/restclient');
+const { get } = require('../common/restClient');
 const logger = require('../common/logger').getLogger();
 const { SERVER_ERROR } = require('../constants');
 const baseUrl = 'https://places.demo.api.here.com/places/v1/browse';
