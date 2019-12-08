@@ -41,4 +41,5 @@ URL : https://hotel-search-backend.herokuapp.com/
 ### Docker Support
 
 1. Build docker image using - `docker build -t hotel-backend-api:local .`
-2. Run app using docker - `docker run -it -p 80:3000 -e HERE_APP_ID=<your_app_id> -e HERE_APP_CODE=<you_app_code> hotel-backend-api:local`
+2. Run app using docker - `docker run -it -p 8000:3000 -e HERE_APP_ID=<your_app_id> -e HERE_APP_CODE=<you_app_code> hotel-backend-api:local`
+3. Browse `http://localhost:8000/' in browser
