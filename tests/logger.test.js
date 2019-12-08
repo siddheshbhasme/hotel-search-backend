@@ -1,11 +1,11 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const tracer = require('tracer');
-const { describe, it } = require('mocha');
+const { describe, it, before, after } = require('mocha');
 const { stub } = require('sinon');
 const { expect } = chai;
 
-const logger = require('../utils/logger').getLogger();
+const logger = require('../common/logger').getLogger();
 
 chai.use(chaiHttp);
 
@@ -21,7 +21,7 @@ describe('Logger', () => {
   });
   it('it should log message on console', done => {
     logger.info('ABCD');
-    expect(console.log.called).to.be.true;
+    expect(console.log.called).to.be.equals(true);
     expect(console.log.callCount).to.be.equals(1);
     expect(console.log.getCall(0).args[0]).to.contains('ABCD');
     done();

@@ -1,6 +1,6 @@
-const axios = require('axios');
 const configs = require('../configs');
-const logger = require('../utils/logger').getLogger();
+const { get } = require('../common/restclient');
+const logger = require('../common/logger').getLogger();
 const baseUrl = 'https://places.demo.api.here.com/places/v1/browse';
 const contextString = ';context=';
 
@@ -48,18 +48,8 @@ const parseResponse = response => {
 
 const getHotelsByCordinates = async criteria => {
   const url = buildUrl(criteria);
-  logger.info('Invoking HERE API');
-  return axios
-    .get(url)
-    .then(response => {
-      logger.info('Successfully fetched hotels from Here API');
-      return parseResponse(response);
-    })
-    .catch(error => {
-      logger.warn('Error occured while invoking HERE API');
-      logger.error(error);
-      return parseError(error);
-    });
+  logger.info('Invoking HERE API for fetching hotels', url);
+  return get(url, parseResponse, parseError);
 };
 
 module.exports = {

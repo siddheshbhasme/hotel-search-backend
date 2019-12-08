@@ -10,15 +10,27 @@ const app = require('../app');
 
 chai.use(chaiHttp);
 
-describe('API GET /hotels - Positive Scenarios - Without Token', () => {
+describe('API GET /locations - Positive Scenario', () => {
   before(() => {
     const expectedResponse = {
-      status: 200,
       data: {
-        results: {
-          next: ';context=nexttoken?',
-          items: [
-            { position: [48.13505, 11.58183], distance: 6, title: 'Isartor' }
+        Response: {
+          View: [
+            {
+              Result: [
+                {
+                  Location: {
+                    DisplayPosition: {
+                      Latitude: 48.13642,
+                      Longitude: 11.57755
+                    },
+                    Address: {
+                      Label: 'München, Bayern, Deutschland'
+                    }
+                  }
+                }
+              ]
+            }
           ]
         }
       }
@@ -29,67 +41,37 @@ describe('API GET /hotels - Positive Scenarios - Without Token', () => {
   after(() => {
     axios.get.restore();
   });
-  it('it should Get all hotels without token', done => {
+  it('it should Get all locations', done => {
     chai
       .request(app)
-      .get('/hotels')
-      .query({ lat: '48.1351', long: '11.5818' })
+      .get('/locations')
+      .query({ query: 'munich' })
       .end((err, res) => {
         expect(err).to.be.equals(null);
         expect(res).to.have.status(200);
         expect(res.body.items).to.length(1);
-        expect(res.body.nextToken).to.be.equal('nexttoken');
+        expect(res.body.items[0].DisplayPosition.Latitude).to.equals(48.13642);
         done();
       });
   });
+
   it('it should validate query params', done => {
     chai
       .request(app)
-      .get('/hotels')
+      .get('/locations')
       .end((err, res) => {
         expect(err).to.be.equals(null);
         expect(res).to.have.status(400);
         expect(res.body.status).to.be.equal(400);
         expect(res.body.message).to.be.equal(
-          'Latitude and Longitude are required for search to work'
+          'Location query is required for search to work'
         );
         done();
       });
   });
 });
 
-describe('GET /hotels - Positive Scenarios - With Token', () => {
-  before(() => {
-    const expectedResponse = {
-      data: {
-        next: ';context=nexttoken?',
-        items: [
-          { position: [48.13505, 11.58183], distance: 6, title: 'Isartor' }
-        ]
-      }
-    };
-    tracer.close();
-    stub(axios, 'get').resolves(Promise.resolve(expectedResponse));
-  });
-  after(() => {
-    axios.get.restore();
-  });
-  it('it should Get hotels as per the token', done => {
-    chai
-      .request(app)
-      .get('/hotels')
-      .query({ lat: '48.1351', long: '11.5818', token: '123' })
-      .end((err, res) => {
-        expect(err).to.be.equals(null);
-        expect(res).to.have.status(200);
-        expect(res.body.items).to.length(1);
-        expect(res.body.nextToken).to.be.equal('nexttoken');
-        done();
-      });
-  });
-});
-
-describe('GET /hotels - Negative Scenarios - Without Response', () => {
+describe('GET /locations - Negative Scenarios - Without Response', () => {
   before(() => {
     const expectedError = {
       status: 400,
@@ -104,8 +86,8 @@ describe('GET /hotels - Negative Scenarios - Without Response', () => {
   it('it should return error 500', done => {
     chai
       .request(app)
-      .get('/hotels')
-      .query({ lat: '48.1351', long: '11.5818' })
+      .get('/locations')
+      .query({ query: 'munich' })
       .end((err, res) => {
         expect(err).to.be.equals(null);
         expect(res).to.have.status(500);
@@ -116,7 +98,7 @@ describe('GET /hotels - Negative Scenarios - Without Response', () => {
   });
 });
 
-describe('GET /hotels - Negative Scenarios - With Response', () => {
+describe('GET /locations - Negative Scenarios - With Response', () => {
   before(() => {
     const expectedError = {
       response: {
@@ -132,8 +114,8 @@ describe('GET /hotels - Negative Scenarios - With Response', () => {
   it('it should return error 400', done => {
     chai
       .request(app)
-      .get('/hotels')
-      .query({ lat: '48.1351', long: '11.5818' })
+      .get('/locations')
+      .query({ query: 'munich' })
       .end((err, res) => {
         expect(err).to.be.equals(null);
         expect(res).to.have.status(400);
@@ -144,7 +126,7 @@ describe('GET /hotels - Negative Scenarios - With Response', () => {
   });
 });
 
-describe('GET /hotels - Negative Scenarios - With Exception', () => {
+describe('GET /locations - Negative Scenarios - With Exception', () => {
   before(() => {
     const expectedError = { status: 500, message: 'Error occured' };
     tracer.close();
@@ -156,8 +138,8 @@ describe('GET /hotels - Negative Scenarios - With Exception', () => {
   it('it should return error 500', done => {
     chai
       .request(app)
-      .get('/hotels')
-      .query({ lat: '48.1351', long: '11.5818' })
+      .get('/locations')
+      .query({ query: 'munich' })
       .end((err, res) => {
         expect(err).to.be.equals(null);
         expect(res).to.have.status(500);

@@ -13,7 +13,7 @@ describe('Application tests', () => {
       .request(app)
       .get('/')
       .end((err, res) => {
-        expect(err).to.null;
+        expect(err).to.be.equals(null);
         expect(res).to.have.status(200);
         expect(res.text.indexOf('<html>') !== -1);
         done();
@@ -25,7 +25,7 @@ describe('Application tests', () => {
       .request(app)
       .get('/nowhere')
       .end((err, res) => {
-        expect(err).to.null;
+        expect(err).to.be.equals(null);
         expect(res).to.have.status(404);
         expect(res.text.indexOf('<html>') !== -1);
         done();
@@ -37,7 +37,7 @@ describe('Application tests', () => {
       .request(app)
       .get('/api-docs')
       .end((err, res) => {
-        expect(err).to.null;
+        expect(err).to.be.equals(null);
         expect(res).to.have.status(200);
         expect(res.text.indexOf('swagger') !== -1);
         done();

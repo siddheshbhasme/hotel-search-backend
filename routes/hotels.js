@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const logger = require('../utils/logger').getLogger();
+const logger = require('../common/logger').getLogger();
 const { searchHotels } = require('../controllers');
 
 /**
@@ -18,13 +18,13 @@ const { searchHotels } = require('../controllers');
  *         in: query
  *         required: true
  *         default: 48.1351
- *         type: string
+ *         type: number
  *       - name: long
  *         description: Longitude for the location
  *         in: query
  *         required: true
  *         default: 11.5818
- *         type: string
+ *         type: number
  *       - name: radius
  *         description: Radius to search from the location in KMs
  *         in: query
@@ -55,14 +55,17 @@ router.get('/', async (req, res) => {
     const criteria = {
       longitude: req.query.long,
       latitude: req.query.lat,
-      radius: req.query.radius || 150,
-      size: req.query.size || 3,
+      radius: req.query.radius || 30,
+      size: req.query.size || 30,
       token: req.query.token
     };
     logger.info('Search Criteria:', JSON.stringify(criteria));
     const output = await searchHotels(criteria);
-    res.status(output.status).send(output);
+    const statusCode = output.status || 200;
+    res.status(statusCode).send(output);
   } catch (err) {
+    logger.warn('Error occured during GET /hotels');
+    logger.error(err);
     res.status(500).send(err);
   }
 });

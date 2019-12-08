@@ -6,7 +6,7 @@
 
 const app = require('../app');
 const configs = require('../configs');
-const logger = require('../utils/logger').getLogger();
+const logger = require('../common/logger').getLogger();
 const http = require('http');
 
 require('dotenv').config();
